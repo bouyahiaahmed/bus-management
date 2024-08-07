@@ -1,0 +1,20 @@
+
+spring:
+  application:
+    name: busManagement
+
+  data:
+      mongodb:
+        uri: mongodb://localhost:27017/busManagementdb
+  mail:
+    host: smtp-mail.outlook.com
+    port: 587
+    username: hameda20101@hotmail.com
+    password: cyberbreakhot0246813579A*
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          from: hameda20101@hotmail.com
