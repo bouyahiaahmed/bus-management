@@ -1,0 +1,48 @@
+<p>rh-interface works!</p>
+
+<div>
+    <h2>Add User</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" required>
+      </div>
+      <!-- <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password" required>
+      </div> -->
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" class="form-control" id="phone" formControlName="phoneNumber" required>
+      </div>
+      <div class="form-group">
+        <div>
+          <label for="age">Age</label>
+          <input type="number" class="form-control" id="age" formControlName="age" required>
+        </div>
+        <div>
+          <label for="sex">sex</label>
+          <select class="form-control" id="sex" formControlName="sex">
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
+        </div>
+        <label for="role">Role</label>
+        <select class="form-control" id="role" formControlName="role">
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!-- <div *ngIf="message">
+      <p>{{ message }}</p>
+    </div> -->
+  </div>

@@ -1,32 +1,31 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RhInterfaceComponent } from './rh-interface/rh-interface.component';
-import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
+import { ButtonModule } from 'primeng/button';
+import { RHInterfaceComponent } from './components/RH/rh-interface/rh-interface.component';
+import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { UpdateuserComponent } from './updateuser/updateuser.component';
-import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RhInterfaceComponent,
-    AdminInterfaceComponent,
-    UpdateuserComponent,
-    UsersComponent
+    RHInterfaceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+    InputTextModule,
+    FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    HttpClientModule
   ],
-  providers: [
-    provideClientHydration()
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
