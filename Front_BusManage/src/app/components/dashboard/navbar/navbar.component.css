@@ -1,0 +1,18 @@
+:host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the navbar is above other content */
+  }
+ 
+  .spacer {
+    flex: 1 1 auto;
+  }
+ 
+  .img-resize {
+    margin-top: 8px;
+    max-width: 60px; /* Set the maximum width for the image */
+    max-height: 60px; /* Set the maximum height for the image */
+    margin-left: 20px; /* Add missing 'px' unit */
+  }

@@ -9,6 +9,10 @@ import { RHInterfaceComponent } from './components/RH/rh-interface/rh-interface.
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TableModule } from 'primeng/table';
+import { DashboardModule } from './components/dashboard/dashboard.module';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -17,13 +21,17 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ButtonModule,
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule,
+    DashboardModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

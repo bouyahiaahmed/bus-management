@@ -1,0 +1,38 @@
+<!-- navbar.component.html -->
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="toggleSidebar()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+
+  <a routerLink="/dashboard" (click)="closeSidebar()">
+    <img class="img-resize" src="../../../../assets/Tunisie_Telecom_Logo.png" alt="Logo">
+  </a>
+
+
+  <div class="spacer"></div>
+
+
+  <button mat-icon-button [matMenuTriggerFor]="langMenu" aria-label="Language">
+    <mat-icon>language</mat-icon>
+  </button>
+  <mat-menu #langMenu="matMenu">
+    <button mat-menu-item>French</button>
+    <button mat-menu-item>English</button>
+  </mat-menu>
+
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon> View Profile
+    </button>
+    <button mat-menu-item >
+      <mat-icon>exit_to_app</mat-icon> Logout
+    </button>
+  </mat-menu>
+
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Profile Collabor">
+    <mat-icon>person</mat-icon>
+  </button>
+</mat-toolbar>

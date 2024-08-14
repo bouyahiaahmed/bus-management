@@ -1,48 +1,54 @@
-<p>rh-interface works!</p>
-
-<div>
-    <h2>Add User</h2>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
+<div class="user-form-container">
+  <h2>Add User</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName">
+      <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="text-danger">
+        First Name is required.
       </div>
-      <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" formControlName="lastName">
+      <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" class="text-danger">
+        Last Name is required.
       </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger">
+        Valid Email is required.
       </div>
-      <!-- <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" formControlName="password" required>
-      </div> -->
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="text" class="form-control" id="phone" formControlName="phoneNumber" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="number" class="form-control" id="phone" formControlName="phoneNumber">
+      <div *ngIf="userForm.get('phoneNumber')?.invalid && userForm.get('phoneNumber')?.touched" class="text-danger">
+        Phone number is required and can only contain numbers and the "+" symbol.
       </div>
-      <div class="form-group">
-        <div>
-          <label for="age">Age</label>
-          <input type="number" class="form-control" id="age" formControlName="age" required>
-        </div>
-        <div>
-          <label for="sex">sex</label>
-          <select class="form-control" id="sex" formControlName="sex">
-            <option value="male">male</option>
-            <option value="female">female</option>
-          </select>
-        </div>
-        <label for="role">Role</label>
-        <select class="form-control" id="role" formControlName="role">
-          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
-        </select>
+    </div>
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" class="form-control" id="age" formControlName="age">
+      <div *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched" class="text-danger">
+        Age is required and cannot be negative.
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <!-- <div *ngIf="message">
-      <p>{{ message }}</p>
-    </div> -->
-  </div>
+    </div>
+    <div class="form-group">
+      <label for="sex">Sex</label>
+      <select class="form-control" id="sex" formControlName="sex">
+        <option value="male">male</option>
+        <option value="female">female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select class="form-control" id="role" formControlName="role">
+        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+  </form>
+</div>

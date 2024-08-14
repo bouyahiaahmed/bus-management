@@ -1,0 +1,39 @@
+/* styles.css or your global CSS file */
+
+.dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the container takes the full height of the viewport */
+    padding: 0 10px; /* Adjust the lateral space */
+    box-sizing: border-box;
+    margin: 0; /* Remove vertical margin */
+  }
+  
+  .card {
+    width: 100%; /* Takes full width available within the container */
+    max-width: 600px; /* Limits the maximum width for the form */
+    padding: 20px; /* Adds padding inside the card */
+    margin: 0; /* Remove vertical margin */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    border-radius: 8px; /* Adds rounded corners */
+    background-color: #fff; /* White background */
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between; /* Aligns buttons to opposite ends */
+  }
+  
+  .mt-3 {
+    margin-top: 24px; /* Adjust as needed */
+  }
+  
+  .m-2 {
+    margin: 8px; /* Adjust as needed */
+  }
+  

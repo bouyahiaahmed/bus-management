@@ -1,0 +1,32 @@
+.user-details-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+  
+  .user-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .user-detail mat-icon {
+    margin-right: 16px;
+    color: #3f51b5;
+  }
+  
+  .detail-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .detail-text strong {
+    font-weight: bold;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+  }
+  

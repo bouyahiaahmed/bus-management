@@ -1,0 +1,223 @@
+/* Styles for the page background and shadow */
+.page-background {
+    background-color: #3f51b5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative; /* Positioning for logo */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.page-background::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 300%; /* Increase the size of the shape */
+    height: 300%; /* Increase the size of the shape */
+    background-color: rgba(255, 255, 255, 0.778); /* Color of the shape */
+    clip-path: circle(50% at 30% -50%); /* Position and shape of the clip */
+}
+
+/* Styles for logos */
+.logo {
+    width: 70px; /* Set width of the logos */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 10px;
+}
+
+.logo2 {
+    margin-top: 10px;
+    width: 350px; /* Set width of the logos */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px;
+}
+
+.logo-top-left {/* Styles for the page background and shadow */
+    .page-background {
+        background-color: #3f51b5;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .logo-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.2; /* Adjust opacity for desired transparency */
+        z-index: -1; /* Place behind other content */
+    }
+    
+    .logo-background-image {
+        width: 100%;
+        height: auto;
+    }
+    
+    /* Styles for logos */
+    .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 70px;
+        height: auto;
+    }
+    
+    /* Styles for the login card */
+    .custom-card {
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 500px;
+        max-width: 80%;
+        height: auto;
+    }
+    
+    /* Styles for the login title */
+    .login {
+        color: rgba(255, 255, 255, 0);
+        font-size: 28px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    
+  /* Styles for form elements */
+mat-form-field {
+    width: 100%;
+}
+
+/* Styles for outline appearance */
+mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white; /* Set outline color to white */
+}
+
+/* Styles for text color */
+.mat-form-field-appearance-outline .mat-form-field-label,
+.mat-form-field-appearance-outline .mat-input-element {
+    color: white !important; /* Set text color to white */
+}
+
+/* Styles for placeholder color */
+::placeholder {
+    color: rgba(255, 255, 255, 0.5); /* Set placeholder text color with transparency */
+}
+
+/* Styles for input focus */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: white; /* Set outline color on focus to white */
+}
+
+/* Styles for mat-icon prefix */
+mat-icon.mat-prefix {
+    color: white; /* Set prefix icon color to white */
+}
+
+/* Styles for mat-checkbox */
+.mat-checkbox {
+    color: white; /* Set checkbox color to white */
+}
+
+/* Styles for mat-checkbox label */
+.mat-checkbox-label {
+    color: white !important; /* Set checkbox label color to white */
+}
+    /* Styles for the form options */
+    .form-options {
+        margin-top: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+    
+    /* Target the mat-checkbox and its label */
+    ::ng-deep .mat-checkbox {
+        color: white !important;
+    }
+    
+    /* Target the text inside mat-checkbox */
+    ::ng-deep .mat-checkbox-label {
+        color: white !important;
+    }
+    
+    /* Styles for the login button */
+    .login-button {
+        margin-top: 20px;
+        width: 50%;
+        background-color: #3f51b5;
+        color: white;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logo-top-middle {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Styles for the login card */
+.custom-card {
+    background-color: transparent; /* Set background color to transparent */
+    border: 2px solid white; /* Add white border */
+    border-radius: 10px; /* Increase border radius for a rounded look */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+    padding: 20px; /* Increase padding for a larger card */
+    width: 600px; /* Adjust card width */
+    max-width: 80%; /* Limit maximum width */
+    height: 400px; /* Adjust height automatically based on content */
+}
+
+/* Styles for the login title */
+.login {
+    color: rgba(255, 255, 255, 0); /* Set text color to white */
+    font-size: 28px; /* Increase font size */
+    margin-bottom: 40px; /* Increase margin bottom for spacing */
+    text-align: center; /* Center align login title */
+}
+
+/* Styles for form elements */
+mat-form-field {
+    width: 100%;
+}
+
+/* Styles for spacing between Remember me and Forgot Password */
+/* Styles for the form options */
+.form-options {
+    margin-top: 0px; /* Increase margin top for spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white; /* Set text color to white */
+}
+
+/* Target the mat-checkbox and its label */
+::ng-deep .mat-checkbox {
+    color: white !important; /* Set checkbox color to white */
+}
+
+/* Target the text inside mat-checkbox */
+::ng-deep .mat-checkbox-label {
+    color: white !important; /* Set checkbox label color to white */
+}
+
+/* Styles for the login button */
+.login-button {
+    margin-top: 20px; /* Increase margin top for spacing */
+    width: 50%; /* Make the login button full width */
+    background-color: #3f51b5; /* Set background color */
+    color: white; /* Set text color */
+    display: block; /* Change button display property to block */
+    margin-left: auto; /* Center the button horizontally */
+    margin-right: auto; /* Center the button horizontally */
+}
