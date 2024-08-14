@@ -13,6 +13,7 @@ export class RHInterfaceComponent implements OnInit {
   user = new User();
   roles = Object.values(Role);
   userForm!: FormGroup; 
+  successMessage = ''; // New variable to store the success message
   constructor(private userService:UserService, private formBuilder: FormBuilder) {
    }
    
@@ -26,17 +27,18 @@ export class RHInterfaceComponent implements OnInit {
       sex: ['', Validators.required],
       username: ['user'],
       password: ['pass'],
+      assignedcredentials: [false],
       role: ['', Validators.required]
     });
   }
 
   onSubmit() {
     if (this.userForm.valid) {
-
       this.userService.addUser(this.userForm.value).subscribe(
         (response) => {
-          console.log('User saved successfully');
-          console.log(response);
+          this.successMessage = 'User added successfully!';
+          console.log('User saved successfully', response);
+          
         },
         error => {
           console.error('Error saving user:', error);

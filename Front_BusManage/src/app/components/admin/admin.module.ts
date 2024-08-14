@@ -10,6 +10,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { CrudbusComponent } from './crudbus/crudbus.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { ViewuserComponent } from './viewuser/viewuser.component';
+import { AssigncredComponent } from './assigncred/assigncred.component';
 
 
 
@@ -18,7 +19,8 @@ import { ViewuserComponent } from './viewuser/viewuser.component';
     CrudusersComponent,
     CrudbusComponent,
     EdituserComponent,
-    ViewuserComponent
+    ViewuserComponent,
+    AssigncredComponent
   ],
   imports: [
     CommonModule,

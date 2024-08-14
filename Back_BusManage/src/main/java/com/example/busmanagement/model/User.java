@@ -25,4 +25,5 @@ public class User {
     private Role role;
     private String username;
     private String password;
+    private boolean assignedcredentials;
 }

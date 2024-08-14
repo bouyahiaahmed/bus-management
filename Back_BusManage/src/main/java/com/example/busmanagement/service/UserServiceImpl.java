@@ -18,6 +18,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private EmailService emailService;
+
     @Override
     public User saveUser(User user) {
         validateUser(user);
@@ -27,16 +29,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
-        User existingUser = userRepository.findById(user.getId()).orElse(null);
-        if (existingUser == null) {
-            throw new IllegalArgumentException("User not found");
+        User existingUser = userRepository.findById(user.getId()).orElseThrow(() ->
+                new IllegalArgumentException("User not found"));
+
+        // Update fields
+        if (user.getFirstName() != null) existingUser.setFirstName(user.getFirstName());
+        if (user.getLastName() != null) existingUser.setLastName(user.getLastName());
+        if (user.getEmail() != null) existingUser.setEmail(user.getEmail());
+        if (user.getPhoneNumber() != 0) existingUser.setPhoneNumber(user.getPhoneNumber());
+        if (user.getSex() != null) existingUser.setSex(user.getSex());
+        if (user.getRole() != null) existingUser.setRole(user.getRole());
+
+        // Check and encode password if changed
+        if (user.getPassword() != null && !passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
         }
 
-        if (!Objects.equals(user.getPassword(), existingUser.getPassword())) {
-            encodePassword(user);
-        }
-
-        return userRepository.save(user);
+        return userRepository.save(existingUser);
     }
 
     @Override
@@ -64,5 +73,25 @@ public class UserServiceImpl implements UserService {
     private void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+    }
+    public User assigncred(User user) {
+        // Ensure the user exists and only update necessary fields
+        User existingUser = userRepository.findById(user.getId()).orElseThrow(() ->
+                new IllegalArgumentException("User not found"));
+
+        // Update only the username and password
+        if (user.getUsername() != null) {
+            existingUser.setUsername(user.getUsername());
+        }
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+                existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
+        }
+        existingUser.setAssignedcredentials(true);
+
+
+        // Save the updated user back to the database
+        return userRepository.save(existingUser);
     }
 }

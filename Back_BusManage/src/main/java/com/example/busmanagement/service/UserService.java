@@ -10,4 +10,5 @@ public interface UserService {
     void deleteUser(String id);
     User saveUser(User user);
     User updateUser(User user);
+    User assigncred(User user);
 }

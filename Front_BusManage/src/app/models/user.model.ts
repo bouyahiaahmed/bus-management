@@ -9,6 +9,7 @@ export class User {
     role: Role;
     username: string;
     password: string;
+    assignedcredentials: boolean ;
 
     constructor() {
         this.id = '';
@@ -18,15 +19,16 @@ export class User {
         this.phoneNumber = 0;
         this.age = 0;
         this.sex = '';
-        this.role = Role.DEFAULT;
+        this.role = Role.empty;
         this.username = '';
         this.password = '';
+        this.assignedcredentials = false;
     }
 }
 export enum Role {
-    DEFAULT = ' ',
     ADMIN = 'ADMIN',
     DRIVER = 'DRIVER',
     RH = 'RH',
-    AGENT = 'AGENT'
+    AGENT = 'AGENT',
+    empty = ''
   }

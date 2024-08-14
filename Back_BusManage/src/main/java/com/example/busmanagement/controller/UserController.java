@@ -4,6 +4,7 @@ import com.example.busmanagement.model.User;
 import com.example.busmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/list")
     public List<User> getAllUsers() {
@@ -43,6 +46,25 @@ public class UserController {
             existingUser.setUsername(user.getUsername());
             existingUser.setPassword(user.getPassword());
             return ResponseEntity.ok(userService.updateUser(existingUser));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping("/assign-credentials/{id}")
+    public ResponseEntity<User> assignCredentials(@PathVariable String id, @RequestBody User user) {
+        User existingUser = userService.getUserById(id);
+        if (existingUser != null) {
+            // Update username and password
+            existingUser.setUsername(user.getUsername());
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                // Only update the password if provided
+                if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+                    existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+                }
+            }
+            // Save the updated user
+            User updatedUser = userService.assigncred(existingUser);
+            return ResponseEntity.ok(updatedUser);
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -51,4 +51,8 @@
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
   </form>
+   <!-- Success message -->
+   <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
 </div>

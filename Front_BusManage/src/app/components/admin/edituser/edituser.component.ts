@@ -12,7 +12,6 @@ import { UserService } from 'src/app/services/user.service';
 export class EdituserComponent {
   editForm: FormGroup;
   constructor(
-   
     public dialogRef: MatDialogRef<EdituserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User,
     private fb: FormBuilder,
@@ -28,22 +27,34 @@ export class EdituserComponent {
       role: [data.role, Validators.required]
     });
   }
+
   closeDialog() {
     this.dialogRef.close();
   }
+  
   save() {
     if (this.editForm.valid) {
-
       const updatedUser: User = { ...this.data, ...this.editForm.value };
-      console.log('data ' , updatedUser)
+      console.log('Updated User Data:', updatedUser); // Log the updated user data
+  
       this.userService.updateUser(updatedUser).subscribe(
         (response) => {
+          console.log('Update Response:', response); // Log the response
           this.dialogRef.close(response);
         },
         (error) => {
-          console.error('Error updating user', error);
+          console.error('Error updating user', error); // Log the error
         }
       );
+    } else {
+      console.log('Form is invalid'); // Log if the form is invalid
+      console.log('Form Errors:', this.editForm.errors); // Log form errors
+      Object.keys(this.editForm.controls).forEach(key => {
+        const controlErrors = this.editForm.get(key)?.errors;
+        if (controlErrors != null) {
+          console.log('Key control: ' + key + ', errors: ' + JSON.stringify(controlErrors));
+        }
+      });
     }
   }
 }

@@ -1,7 +1,8 @@
 package com.example.busmanagement.model;
 
 public enum Role {
-    CLIENT,
-    ADMIN   ,
-    DRIVER
+    AGENT,
+    ADMIN,
+    DRIVER,
+    RH,
 }

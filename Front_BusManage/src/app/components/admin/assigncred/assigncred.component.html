@@ -1,1 +1,28 @@
-<p>assigncred works!</p>
+<div class="button-container" align="right">
+  <button mat-icon-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="container dialog-container">
+  <div class="card p-5 mt-2">
+    <form [formGroup]="editForm" (ngSubmit)="save()">
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>lock</mat-icon>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+      <div class="form-buttons mt-3">
+        <button mat-raised-button class="m-2" type="reset">Clear</button>
+        <button mat-raised-button color="primary" class="m-2" type="submit">Save Modification</button>
+      </div>
+    </form>
+  </div>
+</div>
