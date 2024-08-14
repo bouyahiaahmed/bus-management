@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class CrudbusComponent {
 
+  
+  searchbuses(firstname: string): void {
+    const filterValue = firstname.trim().toLowerCase();
+    this.dataSource.filterPredicate = (data: User, filter: string) => {
+      return data.firstName.toLowerCase().includes(filter);
+    };
+    this.dataSource.filter = filterValue;
+  }
+
 }

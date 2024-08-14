@@ -19,8 +19,10 @@ public class Bus {
     private String id;
     private String busNumber;
     private int maxSeats;
+    private int reservedSeats;
+    private String starting_destination;
     private String plate;
+    private User currentDriver;
     private boolean state;
     private List<User> drivers;
-
 }
