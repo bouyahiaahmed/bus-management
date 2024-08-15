@@ -1,2 +1,4 @@
-package com.example.busmanagement.Dto;public record ErrorDto() {
+package com.example.busmanagement.Dto;
+
+public record ErrorDto (String message) {
 }

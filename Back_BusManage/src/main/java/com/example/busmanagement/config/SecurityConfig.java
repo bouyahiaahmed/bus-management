@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Enable CORS and disable CSRF
         http.cors().and().csrf().disable()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/bus/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll() // Allow POST requests to /user/add without authentication
                 .anyRequest().permitAll() // Allow other endpoints to be accessed without authentication
                 .and()

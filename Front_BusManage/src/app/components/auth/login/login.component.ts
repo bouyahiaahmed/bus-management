@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -14,10 +15,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginService: AuthService
   ) {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
+      login: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -29,21 +31,22 @@ export class LoginComponent implements OnInit {
     }
   }
 
-/*   submit(): void {
+  submit(): void {
     if (this.form.valid) {
-      this.loginService.login(this.form.value.username, this.form.value.password).subscribe(
+      this.loginService.login(this.form.value).subscribe(
         response => {
-          const token = response.access_token;
+          const token = response.token;
           localStorage.setItem("accesstoken", JSON.stringify(token));
-          localStorage.setItem("isLoggedIn", "true");
-          const decoded: any = jwtDecode(token);
-          localStorage.setItem("userRoles", JSON.stringify(decoded.roles));
-          this.router.navigate(['/dashboard']);
+          if (response.role === 'ADMIN') {
+            this.router.navigate(['/dashboard/management/users']);
+          }
+          
+          
         },
         error => {
           console.error('An error occurred:', error);
         }
       );
     }
-  } */
+  }
 }

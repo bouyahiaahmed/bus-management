@@ -1,1 +1,34 @@
-<p>editbus works!</p>
+<div class="button-container" align="right">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <div class="container dialog-container">
+    <div class="card p-5 mt-2">
+      <form [formGroup]="busForm" (ngSubmit)="editBus()">
+        <mat-form-field appearance="outline">
+          <mat-label>Bus Number</mat-label>
+          <input matInput formControlName="busNumber" placeholder="Bus Number">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Max Seats</mat-label>
+          <input matInput formControlName="maxSeats" type="number" placeholder="Max Seats">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state">
+            <mat-option [value]="true">Active</mat-option>
+            <mat-option [value]="false">Inactive</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-divider></mat-divider>
+        <div class="text-center mt-3">
+          <button mat-raised-button color="primary" class="m-2" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>

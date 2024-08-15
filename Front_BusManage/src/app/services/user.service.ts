@@ -9,7 +9,6 @@ export class UserService {
 
   constructor(private _http: HttpClient) { }
   private apiUrl = 'http://localhost:8080/user';
-  private emailApiUrl = 'http://localhost:8080/email';
 
   getUsers(): Observable<any[]> {
     return this._http.get<any[]>('http://localhost:8080/user/list');
@@ -38,6 +37,8 @@ export class UserService {
     
       return this._http.get<string>('http://localhost:8080/email/send', { params, responseType: 'text' as 'json' });
     }
-
+    getUsersByRole(role: string): Observable<any[]> {
+      return this._http.get<any[]>(`${this.apiUrl}/by-role/${role}`);
+    }
     
 }

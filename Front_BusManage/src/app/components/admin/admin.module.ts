@@ -11,6 +11,9 @@ import { CrudbusComponent } from './crudbus/crudbus.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { ViewuserComponent } from './viewuser/viewuser.component';
 import { AssigncredComponent } from './assigncred/assigncred.component';
+import { EditbusComponent } from './editbus/editbus.component';
+import { AddbusComponent } from './addbus/addbus.component';
+import { AssignbusComponent } from './assignbus/assignbus.component';
 
 
 
@@ -20,7 +23,10 @@ import { AssigncredComponent } from './assigncred/assigncred.component';
     CrudbusComponent,
     EdituserComponent,
     ViewuserComponent,
-    AssigncredComponent
+    AssigncredComponent,
+    EditbusComponent,
+    AddbusComponent,
+    AssignbusComponent
   ],
   imports: [
     CommonModule,

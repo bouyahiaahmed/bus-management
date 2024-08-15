@@ -1,0 +1,63 @@
+/* styles.css or your global CSS file */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Space between each form field */
+    margin: 20px; /* Space around the form container */
+    padding: 20px; /* Space inside the form container */
+    background-color: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the container takes the full height of the viewport */
+    padding: 0 10px; /* Adjust the lateral space */
+    box-sizing: border-box;
+    margin: 0; /* Remove vertical margin */
+  }
+  
+  .card {
+    width: 100%; /* Takes full width available within the container */
+    max-width: 600px; /* Limits the maximum width for the form */
+    padding: 20px; /* Adds padding inside the card */
+    margin: 0; /* Remove vertical margin */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    border-radius: 8px; /* Adds rounded corners */
+    background-color: #fff; /* White background */
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .custom-select-panel {
+    margin-top: 8px !important;
+  }
+  
+  .text-center {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mt-2 {
+    margin-top: 16px; /* Adjust as needed */
+  }
+  
+  .mt-3 {
+    margin-top: 24px; /* Adjust as needed */
+  }
+  
+  .m-2 {
+    margin: 8px; /* Adjust as needed */
+  }
+  

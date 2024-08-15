@@ -6,7 +6,9 @@ import com.example.busmanagement.model.User;
 import com.example.busmanagement.repository.BusRepository;
 import com.example.busmanagement.repository.UserMongoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -41,42 +43,12 @@ public class BusServiceImpl implements BusService{
         busRepository.findById(id).ifPresent(bus1 -> {
             bus1.setBusNumber(bus.getBusNumber());
             bus1.setMaxSeats(bus.getMaxSeats());
-            bus1.setPlate(bus.getPlate());
             bus1.setState(bus.isState());
-            bus1.setDrivers(bus.getDrivers());
             busRepository.save(bus1);
         });
         return bus;
     }
 
-    @Override
-    public Bus addDriver(String id, String userId) {
-        User driver = userMongoRepository.findById(userId).orElse(null);
-        Bus bus = busRepository.findById(id).orElse(null);
-        if(driver == null || bus == null){
-            throw new IllegalArgumentException("Driver or Bus not found");
-        }
-        if(driver.getRole().equals(Role.DRIVER)){
-            bus.getDrivers().add(driver);
-            busRepository.save(bus);
-            }
-        return bus;
-    }
-
-    @Override
-    public Bus removeDriver(String id, String userId) {
-        User driver = userMongoRepository.findById(userId).orElse(null);
-        Bus bus = busRepository.findById(id).orElse(null);
-        if(driver == null || bus == null){
-            throw new IllegalArgumentException("Driver or Bus not found");
-        }
-        if(driver.getRole().equals(Role.DRIVER)){
-            bus.getDrivers().remove(driver);
-            busRepository.save(bus);
-        }
-        return bus;
-
-    }
 
     @Override
     public Bus changeState(String id) {
@@ -89,73 +61,16 @@ public class BusServiceImpl implements BusService{
         return bus;
     }
 
-    @Override
-    public List<Bus> getBusesByDriver(String driverId) {
-        return List.of();
-    }
 
     @Override
-    public List<Bus> getBusesByDriverName(String driverName) {
-        return List.of();
-    }
+    public void updateBusDriver(String busId, String currentDriverId, String startingDestination) {
+        // Retrieve the bus from the database
+        Bus bus = busRepository.findById(busId).orElseThrow(() -> new RuntimeException("Bus not found"));
 
-    @Override
-    public List<Bus> getBusesByDriverLastName(String driverLastName) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByDriverEmail(String driverEmail) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByDriverPhoneNumber(int driverPhoneNumber) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByDriverAge(int driverAge) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByDriverSex(String driverSex) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByDriverRole(Role driverRole) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByDriverUsername(String driverUsername) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByDriverPassword(String driverPassword) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByBusNumber(String busNumber) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByMaxSeats(int maxSeats) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByPlate(String plate) {
-        return List.of();
-    }
-
-    @Override
-    public List<Bus> getBusesByState(boolean state) {
-        return List.of();
+        // Update the bus details
+        bus.setCurrentDriver(userMongoRepository.findById(currentDriverId).orElseThrow(() -> new RuntimeException("Driver not found")));
+        bus.setStarting_destination(startingDestination);
+        // Save the updated bus
+        busRepository.save(bus);
     }
 }

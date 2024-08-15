@@ -1,5 +1,9 @@
 package com.example.busmanagement.controller;
 
+import com.example.busmanagement.Dto.CredentialsDto;
+import com.example.busmanagement.Dto.UserDto;
+import com.example.busmanagement.config.UserAuthProvider;
+import com.example.busmanagement.model.Role;
 import com.example.busmanagement.model.User;
 import com.example.busmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +22,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserAuthProvider userAuthProvider;
 
     @GetMapping("/list")
     public List<User> getAllUsers() {
@@ -52,21 +56,40 @@ public class UserController {
     }
     @PutMapping("/assign-credentials/{id}")
     public ResponseEntity<User> assignCredentials(@PathVariable String id, @RequestBody User user) {
+        System.out.println(user);
         User existingUser = userService.getUserById(id);
         if (existingUser != null) {
-            // Update username and password
+            // Update username
             existingUser.setUsername(user.getUsername());
+
+            // Check if the provided password is different from the existing password
             if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-                // Only update the password if provided
-                if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-                    existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+                if (!user.getPassword().equals(existingUser.getPassword())) {
+                    // Set the plain text password directly
+                    existingUser.setPassword(user.getPassword());
                 }
             }
+
             // Save the updated user
             User updatedUser = userService.assigncred(existingUser);
             return ResponseEntity.ok(updatedUser);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+    @PostMapping("/login")
+    public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto){
+        UserDto user = userService.login(credentialsDto);
+        user.setToken(userAuthProvider.createToken(user));
+        return ResponseEntity.ok(user);
+    }
+    @GetMapping("/by-role/{role}")
+    public ResponseEntity<List<User>> getUsersByRole(@PathVariable Role role) {
+        List<User> users = userService.findByRole(role);
+        if (users != null && !users.isEmpty()) {
+            return ResponseEntity.ok(users);
+        } else {
+            return ResponseEntity.noContent().build();
         }
     }
 }
