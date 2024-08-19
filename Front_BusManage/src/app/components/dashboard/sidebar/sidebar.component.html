@@ -1,22 +1,46 @@
+<!-- sidebar.component.html -->
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav class="sidenav" mode="side" opened="false"   >
-      <mat-nav-list class="sidebar-menu">
+  <mat-sidenav #sidenav class="sidenav" mode="side" [opened]="true">
+    <mat-nav-list class="sidebar-menu">
+      <!-- Options for ADMIN role -->
+      <ng-container *ngIf="userRole === 'ADMIN'">
         <mat-list-item class="sidebar-menu-item">
           <a mat-list-item routerLink="/dashboard/management/users" (click)="toggleSidebar()">
             <mat-icon mat-list-icon>people</mat-icon>
-            <span mat-line  >Manage Users</span>
+            <span mat-line>Manage Users</span>
           </a>
         </mat-list-item>
         <mat-list-item class="sidebar-menu-item">
           <a mat-list-item routerLink="/dashboard/management/bus" (click)="toggleSidebar()">
             <mat-icon mat-list-icon>business</mat-icon>
-            <span mat-line>Manage Departments</span>
+            <span mat-line>Manage Buses</span>
           </a>
         </mat-list-item>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content class="content">
-      <!-- Main content goes here -->
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+      </ng-container>
+
+      <!-- Option for AGENT role -->
+      <ng-container *ngIf="userRole === 'AGENT'">
+        <mat-list-item class="sidebar-menu-item">
+          <a mat-list-item routerLink="/dashboard/agent/reserve" (click)="toggleSidebar()">
+            <mat-icon mat-list-icon>event</mat-icon>
+            <span mat-line>Reservation</span>
+          </a>
+        </mat-list-item>
+      </ng-container>
+
+      <!-- Option for DRIVER role -->
+      <ng-container *ngIf="userRole === 'DRIVER'">
+        <mat-list-item class="sidebar-menu-item">
+          <a mat-list-item routerLink="/dashboard/driver/plan" (click)="toggleSidebar()">
+            <mat-icon mat-list-icon>schedule</mat-icon>
+            <span mat-line>Planning</span>
+          </a>
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <!-- Main content goes here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

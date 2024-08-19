@@ -47,8 +47,15 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User user) {
         User existingUser = userService.getUserById(id);
         if (existingUser != null) {
-            existingUser.setUsername(user.getUsername());
-            existingUser.setPassword(user.getPassword());
+            // Update fields, but do not change username or password
+            existingUser.setFirstName(user.getFirstName() != null ? user.getFirstName() : existingUser.getFirstName());
+            existingUser.setLastName(user.getLastName() != null ? user.getLastName() : existingUser.getLastName());
+            existingUser.setEmail(user.getEmail() != null ? user.getEmail() : existingUser.getEmail());
+            existingUser.setPhoneNumber(user.getPhoneNumber() != 0 ? user.getPhoneNumber() : existingUser.getPhoneNumber());
+            existingUser.setSex(user.getSex() != null ? user.getSex() : existingUser.getSex());
+            existingUser.setRole(user.getRole() != null ? user.getRole() : existingUser.getRole());
+
+            // Call updateUser service method
             return ResponseEntity.ok(userService.updateUser(existingUser));
         } else {
             return ResponseEntity.notFound().build();

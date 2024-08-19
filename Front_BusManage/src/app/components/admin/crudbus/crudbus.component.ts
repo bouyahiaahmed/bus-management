@@ -18,7 +18,7 @@ export class CrudbusComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = ['busNumber', 'maxSeats', 'reservedSeats', 'startingDestination', 'currentDriver', 'state', 'actions'];
+  displayedColumns: string[] = ['busNumber', 'maxSeats', 'reservedSeats', 'startingDestination', 'departureDate', 'departureTime', 'currentDriver', 'state', 'actions'];
   dataSource: MatTableDataSource<Bus> = new MatTableDataSource();
 
   constructor(private busService: BusService, private dialog: MatDialog) {}

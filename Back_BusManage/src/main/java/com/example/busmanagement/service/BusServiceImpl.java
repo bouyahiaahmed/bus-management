@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -63,14 +66,72 @@ public class BusServiceImpl implements BusService{
 
 
     @Override
-    public void updateBusDriver(String busId, String currentDriverId, String startingDestination) {
+    public void updateBusDriver(String busId, String currentDriverId, String startingDestination, String departureDate, String departureTime) {
         // Retrieve the bus from the database
-        Bus bus = busRepository.findById(busId).orElseThrow(() -> new RuntimeException("Bus not found"));
+        Bus bus = busRepository.findById(busId)
+                .orElseThrow(() -> new RuntimeException("Bus not found"));
 
         // Update the bus details
-        bus.setCurrentDriver(userMongoRepository.findById(currentDriverId).orElseThrow(() -> new RuntimeException("Driver not found")));
+        bus.setCurrentDriver(userMongoRepository.findById(currentDriverId)
+                .orElseThrow(() -> new RuntimeException("Driver not found")));
         bus.setStarting_destination(startingDestination);
+        bus.setDepartureDate(departureDate); // Assuming setter exists
+        bus.setDepartureTime(departureTime); // Assuming setter exists
+
         // Save the updated bus
         busRepository.save(bus);
+    }
+    public boolean reserveSeat(String busId, User user) {
+        // Find the bus by its ID
+        Bus bus = busRepository.findById(busId).orElse(null);
+
+        if (bus == null) {
+            // Bus not found
+            return false;
+        }
+
+        // Check if the user has already reserved a seat
+        if (bus.getPassengers() != null && bus.getPassengers().contains(user)) {
+            // User has already reserved a seat
+            return false; // Or return a specific message or status
+        }
+
+        // Check if there are available seats
+        if (bus.getReservedSeats() >= bus.getMaxSeats()) {
+            // No available seats
+            return false;
+        }
+
+        // Increment the reserved seats
+        bus.setReservedSeats(bus.getReservedSeats() + 1);
+
+        // Add the user to the list of passengers
+        if (bus.getPassengers() == null) {
+            bus.setPassengers(new ArrayList<>());
+        }
+        bus.getPassengers().add(user);
+
+        // Save the updated bus object
+        busRepository.save(bus);
+
+        return true;
+    }
+    public boolean removeAllPassengers(String busId) {
+        // Find the bus by its ID
+        Bus bus = busRepository.findById(busId).orElse(null);
+
+        if (bus == null) {
+            // Bus not found
+            return false;
+        }
+
+        // Clear the list of passengers
+        bus.setPassengers(new ArrayList<>());
+        bus.setReservedSeats(0);
+
+        // Save the updated bus object
+        busRepository.save(bus);
+
+        return true;
     }
 }

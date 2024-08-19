@@ -1,6 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,18 +23,20 @@ export class BusService {
     deleteBus(id: string): Observable<any> {
       return this._http.delete<any>(`${this.apiUrl}/delete/${id}`);
     }
-    assignBus(busId: string, driverId: string, startingDestination: string): Observable<string> {
-      // Encode the startingDestination to handle special characters
+    assignBus(busId: string, driverId: string, startingDestination: string, departureDate: string, departureTime: string): Observable<string> {
+      // Encode parameters to handle special characters
       const encodedDestination = encodeURIComponent(startingDestination);
+      const encodedDate = encodeURIComponent(departureDate);
+      const encodedTime = encodeURIComponent(departureTime);
       
-      // Specify that the response should be treated as plain text
-      return this._http.put<string>(
-        `${this.apiUrl}/assign-driver/${busId}/${driverId}/${encodedDestination}`, 
-        null, 
-        { responseType: 'text' as 'json' }
-      );
-    }
+      // Construct the URL with encoded parameters
+      const url = `${this.apiUrl}/assign-driver/${busId}/${driverId}/${encodedDestination}/${encodedDate}/${encodedTime}`;
     
-
+      // Specify that the response should be treated as plain text
+      return this._http.put<string>(url, null, { responseType: 'text' as 'json' });
+    }
+    reserveSeat(busId: string, user: User): Observable<string> {
+      return this._http.post<string>(`http://localhost:8080/bus/${busId}/reserve`, user, { responseType: 'text' as 'json' });
+    }
 
 }

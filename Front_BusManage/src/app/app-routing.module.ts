@@ -15,6 +15,7 @@ const routes: Routes = [
   // Wildcard route to redirect to login page for any other URL
   //{ path: '**', redirectTo: '/login' },
   {path: 'rh', loadChildren: () => import('./components/RH/rh.module').then(m => m.RHModule)},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 

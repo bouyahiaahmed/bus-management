@@ -49,8 +49,7 @@
           <mat-icon matPrefix>assignment</mat-icon>
           <mat-label>Role</mat-label>
           <mat-select formControlName="role">
-            <mat-option value="admin">Admin</mat-option>
-            <mat-option value="user">User</mat-option>
+            <mat-option *ngFor="let role of roles" [value]="role">{{ role | titlecase }}</mat-option>
           </mat-select>
         </mat-form-field>
   

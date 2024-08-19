@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Document
@@ -23,4 +25,7 @@ public class Bus {
     private String starting_destination;
     private User currentDriver;
     private boolean state;
+    List<User> passengers;
+    private String departureDate;
+    private String departureTime;
 }

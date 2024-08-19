@@ -48,11 +48,6 @@ public class UserServiceImpl implements UserService {
         if (user.getSex() != null) existingUser.setSex(user.getSex());
         if (user.getRole() != null) existingUser.setRole(user.getRole());
 
-        // Check and encode password if changed
-        if (user.getPassword() != null && !passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-
         return userRepository.save(existingUser);
     }
 

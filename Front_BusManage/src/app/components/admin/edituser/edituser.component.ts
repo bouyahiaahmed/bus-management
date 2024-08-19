@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { User } from 'src/app/models/user.model';
+import { Role, User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EdituserComponent {
   editForm: FormGroup;
+  roles = Object.values(Role);
   constructor(
     public dialogRef: MatDialogRef<EdituserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User,
@@ -36,11 +37,11 @@ export class EdituserComponent {
     if (this.editForm.valid) {
       const updatedUser: User = { ...this.data, ...this.editForm.value };
       console.log('Updated User Data:', updatedUser); // Log the updated user data
-  
+
       this.userService.updateUser(updatedUser).subscribe(
         (response) => {
           console.log('Update Response:', response); // Log the response
-          this.dialogRef.close(response);
+          this.dialogRef.close(response); // Close dialog and return updated user data
         },
         (error) => {
           console.error('Error updating user', error); // Log the error

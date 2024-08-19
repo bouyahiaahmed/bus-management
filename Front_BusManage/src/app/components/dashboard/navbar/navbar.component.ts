@@ -29,6 +29,11 @@ export class NavbarComponent  {
     this.sidebarToggleService.closeSidebar();
   }
 
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
+
 
  
 }

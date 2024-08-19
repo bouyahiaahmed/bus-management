@@ -45,7 +45,10 @@ export class AddbusComponent {
       state: [false, Validators.required],
       startingdestination: [''],
       currentDriver: [this.emptyUser],
-      reservedseat: [0]
+      reservedseat: [0],
+      passengers: [[]],
+      departureDate: ['',],
+      departureTime: ['',]
     });
   }
 

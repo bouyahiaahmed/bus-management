@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'; // Add this line
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) { 
+          // Assuming you store user info in localStorage after login
+          const storedUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+          if (storedUser) {
+            this.userSubject.next(storedUser);
+          }
+  }
   private apiUrl = 'http://localhost:8080/user';
 
   getUsers(): Observable<any[]> {
@@ -40,5 +47,17 @@ export class UserService {
     getUsersByRole(role: string): Observable<any[]> {
       return this._http.get<any[]>(`${this.apiUrl}/by-role/${role}`);
     }
+
+    private userSubject = new BehaviorSubject<User | null>(null);
+    currentUser = this.userSubject.asObservable();
+  
     
-}
+    setUser(user: User) {
+      this.userSubject.next(user);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+  
+    getCurrentUser(): User | null {
+      return this.userSubject.value;
+    }
+  }

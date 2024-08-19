@@ -32,7 +32,10 @@ export class AssignbusComponent {
 
   initializeForm(): void {
     this.busForm = this.fb.group({
-      startingDestination: [this.data.startingDestination, Validators.required],
+      startingDestination: [this.data.starting_destination, Validators.required],
+      departureDate: [this.data.departureDate, Validators.required],
+      departureTime: [this.data.departureTime, Validators.required],
+      currentDriver: [this.data.currentDriver, Validators.required]
     });
   }
 
@@ -58,8 +61,8 @@ export class AssignbusComponent {
 
   assignBus(): void {
     if (this.busForm.valid && this.selectedDriverId) {
-      const { startingDestination } = this.busForm.value;
-      this.busService.assignBus(this.data.id, this.selectedDriverId, startingDestination).subscribe(
+      const { startingDestination, departureDate, departureTime } = this.busForm.value;
+      this.busService.assignBus(this.data.id, this.selectedDriverId, startingDestination, departureDate, departureTime).subscribe(
         response => {
           console.log('Bus assigned successfully:', response);
           this.busmod = true;
@@ -70,6 +73,8 @@ export class AssignbusComponent {
           this.dialogRef.close(false); // Pass a boolean value to indicate failure
         }
       );
+    } else {
+      console.log('Form is invalid or no driver selected');
     }
   }
 }

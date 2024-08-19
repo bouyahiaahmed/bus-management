@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Bus } from 'src/app/models/bus.model';
 import { BusService } from 'src/app/services/bus.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-reservation',
@@ -44,8 +45,37 @@ export class ReservationComponent {
     };
     this.dataSource.filter = filterValue;
 }
-  reserve(){
+reserve(element: Bus): void {
+  const userJson = localStorage.getItem('user');
+  if (userJson) {
+    const user: User = JSON.parse(userJson);
+    console.log('Reserving seat for user:', user);
     
+    this.busService.reserveSeat(element.id, user).subscribe(
+      (response: string) => {
+        if (response === 'already_reserved') {
+          // Show a message indicating the user has already reserved a seat
+          alert('You have already reserved a seat on this bus.');
+        } else if (response === 'no_seats_available') {
+          // Handle case where no seats are available
+          alert('No available seats on this bus.');
+        } else {
+          // Handle successful reservation
+          console.log('Reservation successful:', response);
+          this.loadBuses(); // Reload the buses to update the reserved seats
+        }
+      },
+      error => {
+        console.error('Reservation failed:', error);
+        if (error.error) {
+          console.error('Error details:', error.error);
+        }
+        // Handle reservation failure (e.g., show an error message)
+      }
+    );
+  } else {
+    console.error('No user found in local storage');
+    // Handle the case where no user is found
   }
-
+}
 }

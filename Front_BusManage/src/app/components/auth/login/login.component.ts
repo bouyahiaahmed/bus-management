@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
+  
 
   ngOnInit(): void {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -37,8 +38,20 @@ export class LoginComponent implements OnInit {
         response => {
           const token = response.token;
           localStorage.setItem("accesstoken", JSON.stringify(token));
+          const user = response;
+          console.log(response);
+          localStorage.setItem('user', JSON.stringify(user));
           if (response.role === 'ADMIN') {
             this.router.navigate(['/dashboard/management/users']);
+          }
+          if (response.role === 'AGENT') {
+            this.router.navigate(['dashboard/agent/reserve']);
+          }
+          if (response.role === 'DRIVER') {
+            this.router.navigate(['/dashboard/driver/plan']);
+          }
+          if (response.role === 'RH') {
+            this.router.navigate(['/rh']);
           }
           
           
